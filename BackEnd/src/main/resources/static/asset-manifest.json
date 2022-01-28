@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.61310ba3.chunk.css",
+    "main.js": "/static/js/main.c878015e.chunk.js",
+    "main.js.map": "/static/js/main.c878015e.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.edcb1bd1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.edcb1bd1.js.map",
+    "static/css/2.5c959cfe.chunk.css": "/static/css/2.5c959cfe.chunk.css",
+    "static/js/2.2bfb4eb1.chunk.js": "/static/js/2.2bfb4eb1.chunk.js",
+    "static/js/2.2bfb4eb1.chunk.js.map": "/static/js/2.2bfb4eb1.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.5c959cfe.chunk.css.map": "/static/css/2.5c959cfe.chunk.css.map",
+    "static/css/main.61310ba3.chunk.css.map": "/static/css/main.61310ba3.chunk.css.map",
+    "static/js/2.2bfb4eb1.chunk.js.LICENSE.txt": "/static/js/2.2bfb4eb1.chunk.js.LICENSE.txt",
+    "static/media/SearchBar.module.css": "/static/media/Mercedes-Benz_Maybach_Vision_6_Front_Wine_color.c54d2a70.jpg",
+    "static/media/SUV.5ce0bb8d.png": "/static/media/SUV.5ce0bb8d.png",
+    "static/media/Gallery.css": "/static/media/background3.831b0174.png",
+    "static/media/descapotable.df6c4d63.jpg": "/static/media/descapotable.df6c4d63.jpg",
+    "static/media/limusina.a6d9651f.jpg": "/static/media/limusina.a6d9651f.jpg",
+    "static/media/logo.9d849885.png": "/static/media/logo.9d849885.png",
+    "static/media/sedan.95985989.jpg": "/static/media/sedan.95985989.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.edcb1bd1.js",
+    "static/css/2.5c959cfe.chunk.css",
+    "static/js/2.2bfb4eb1.chunk.js",
+    "static/css/main.61310ba3.chunk.css",
+    "static/js/main.c878015e.chunk.js"
+  ]
+}
