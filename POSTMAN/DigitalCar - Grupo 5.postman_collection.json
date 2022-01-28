@@ -1,0 +1,2771 @@
+{
+	"info": {
+		"_postman_id": "d0194a54-8e1f-48aa-80d2-1ee8d863e367",
+		"name": "DigitalCar - Grupo 5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Categories - Add new category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"pm.environment.get(\"variable_key\");\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is 0\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Length'))===0;\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"description\" : \"Para viajar sin limites\",\r\n    \"imgUrl\" : \"https://images-tpi.s3.sa-east-1.amazonaws.com\",\r\n    \"title\" : \"Autocaravanas\"\r\n   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/categories",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories - Get all categories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get new category\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Not empty response\", function(){\r",
+							"response = pm.response.json().length > 0\r",
+							"    pm.expect(response).to.be.true\r",
+							"});\r",
+							"pm.test(\"Validate title\", function(){\r",
+							"    response = pm.response.json();\r",
+							"    let category = response.find (x => x.id === 2)\r",
+							"    pm.expect(category.title).to.be.equals(\"Descapotable\")\r",
+							"})\r",
+							"pm.test(\"Validate image´s url\", function(){\r",
+							"    response = pm.response.json();\r",
+							"    let category = response.find (x => x.title === \"Descapotable\")\r",
+							"    pm.expect(category.imgUrl).contains(\"volkswagen-t-roc\")\r",
+							"})\r",
+							"pm.test(\"Validate description\", function(){\r",
+							"    response = pm.response.json();\r",
+							"    let category = response.find(x=> x.title === \"SUV\")\r",
+							"    pm.expect(category.description).contains(\"semana en la ciudad\")\r",
+							"})\r",
+							"pm.test(\"Validates url\", function(){\r",
+							"     response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.imgUrl).contains(\"https://images-tpi.s3.sa-east-1.amazonaws.com\")\r",
+							"     })\r",
+							"})\r",
+							"pm.test(\"Not duplicated values\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        for (let j=0; j<response.length;j++){\r",
+							"             if (response[i]===response[j] )\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"        }\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/categories",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories - Put category by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is 0\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Length'))===0;\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\" : \"Motorhome\",\r\n    \"description\" : \"Para recorrer sin límites\",\r\n    \"imgUrl\" : \"https://images-tpi.s3.sa-east-1.amazonaws.com\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/categories/30",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"categories",
+						"30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories - Delete category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is 0\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Length'))===0;\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{host}}/categories/30",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"categories",
+						"30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories - Check deleted category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get new category\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Not empty response\", function(){\r",
+							"response = pm.response.json().length > 0\r",
+							"    pm.expect(response).to.be.true\r",
+							"});\r",
+							"pm.test(\"Validate title\", function(){\r",
+							"    response = pm.response.json();\r",
+							"    let category = response.find (x => x.id === 2)\r",
+							"    pm.expect(category.title).to.be.equals(\"Descapotable\")\r",
+							"})\r",
+							"pm.test(\"Validate image´s url\", function(){\r",
+							"    response = pm.response.json();\r",
+							"    let category = response.find (x => x.title === \"Descapotable\")\r",
+							"    pm.expect(category.imgUrl).contains(\"volkswagen-t-roc\")\r",
+							"})\r",
+							"pm.test(\"Validate description\", function(){\r",
+							"    response = pm.response.json();\r",
+							"    let category = response.find(x=> x.title === \"SUV\")\r",
+							"    pm.expect(category.description).contains(\"semana en la ciudad\")\r",
+							"})\r",
+							"pm.test(\"Validates url\", function(){\r",
+							"     response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.imgUrl).contains(\"https://images-tpi.s3.sa-east-1.amazonaws.com\")\r",
+							"     })\r",
+							"})\r",
+							"pm.test(\"Not duplicated values\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        for (let j=0; j<response.length;j++){\r",
+							"             if (response[i]===response[j] )\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"        }\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{host}}/categories",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cities - New city",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is 0\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Length'))===0;\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"ciudad\",\r\n    \"name\": \"General Roca\",   \"country\": \"Argentina\",\r\n    \"latitude\": -41.1525644,\r\n    \"longitude\": -71.1545585\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/cities",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cities - New city with duplicated values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"If duplicated values status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"ciudad\",\r\n    \"name\": \"General Roca\",   \"country\": \"Argentina\",\r\n    \"latitude\": -41.1525644,\r\n    \"longitude\": -71.1545585\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/cities",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cities - Get all cities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Not null values\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if (response[i].name!==null ||\r",
+							"        response[i].country !== null)\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Not empty response\", function() {\r",
+							"    response = pm.response.json().length > 0\r",
+							"    pm.expect(response).to.be.true\r",
+							"});\r",
+							"pm.test(\"Cities from Argentina\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if (response[i].name!==null && \r",
+							"        response[i].country === \"Argentina\")\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Validate types\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if (response[i].type!==null && (\r",
+							"        response[i].type === \"ciudad\" || response[i].type ===\"aeropuerto\" ))\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Validate coordinates from Argentina\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if ((response[i].latitude!==null && response[i].longitude!==null) && (\r",
+							"        response[i].latitude < -21.783321 && response[i].latitude> -55.0058333 &&response[i].longitude < -53.677600 && response[i].longitude > -73.541129))\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Not duplicated values\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        for (let j=0; j<response.length;j++){\r",
+							"             if (response[i]===response[j] )\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"        }\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Validate city\",function(){\r",
+							"    let response = pm.response.json();\r",
+							"    let city = response.find(x => x.id === 2)\r",
+							"    pm.expect(city).not.to.be.undefined\r",
+							"    pm.expect(city.name).to.be.equals(\"Bariloche Centro\")\r",
+							"    pm.expect(city.type).to.be.equals(\"ciudad\")\r",
+							"\r",
+							"})\r",
+							"pm.test(\"Validate cities´s coordinates\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    let city = response.find(x => x.name === \"Buenos Aires Aeroparque (AEP)\")\r",
+							"    pm.expect(city.latitude)=== -34.5591928\r",
+							"    pm.expect(city.longitude)=== -58.4147243\r",
+							"})\r",
+							"pm.test(\"Validate response to be an object\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i]).to.be.an(\"object\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate Id is a number\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].id).to.be.a(\"number\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate type to be a string\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].type).to.be.a(\"string\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate name to be a string\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].name).to.be.a(\"string\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate country to be a string\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].country).to.be.a(\"string\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate latitude to be a number\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].latitude).to.be.a(\"number\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate longitude to be a number\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].longitude).to.be.a(\"number\")\r",
+							"   }\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/cities",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Features - Add new feature",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is 0\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Length'))===0;\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Camas: 4\",\r\n    \"icon\" : \"fas fa-bed\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/features",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"features"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Features - Get all features",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Not null values\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if (response[i].name!==null ||\r",
+							"        response[i].icon !== null )\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Not empty response\", function() {\r",
+							"    response = pm.response.json().length > 0\r",
+							"    pm.expect(response).to.be.true\r",
+							"});\r",
+							"pm.test(\"Validate icon\", function () {\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        pm.expect(response[i].icon).contains(\"fas fa-\")\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate not to be undefined\", function () {\r",
+							"   \r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        pm.expect(response[i]).not.to.be.undefined\r",
+							"    \r",
+							"    }\r",
+							"   });\r",
+							"\r",
+							"pm.test(\"Not duplicated values\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        for (let j=0; j<response.length;j++){\r",
+							"             if (response[i]===response[j] )\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"        }\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate ID is a number\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].id).to.be.a(\"number\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate icon to be a string\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].icon).to.be.a(\"string\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate name to be a string\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].name).to.be.a(\"string\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate response to be an object\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i]).to.be.an(\"object\")\r",
+							"   }\r",
+							"})\r",
+							"   "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/features",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"features"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cars - Add new car",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is 0\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Length'))===0;\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"M.Benz Sprinter Royal Home\",\r\n    \"description\": \"Manual\",\r\n    \"features\": [\r\n        {\r\n         \"name\": \"Camas: 4\",\r\n        \"icon\": \"fas fa-bed\"\r\n        }\r\n    ],\r\n    \"category\": {\r\n        \"id\": 26\r\n    },\r\n    \"images\": [\r\n        {\r\n             \"title\": \"Sprinter Royal Home 1\",\r\n    \"position\": 0,\r\n    \"url\": \"https://images-tpi.s3.sa-east-1.amazonaws.com\"\r\n        }\r\n    ],\r\n    \"city\": {\r\n        \"id\": 1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/cars",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cars - Get all cars",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.be.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Not null values\", function () {\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if (response[i].name!==null ||\r",
+							"        response[i].description !== null ||\r",
+							"        response[i].features !== null ||\r",
+							"        response[i].images !== null ||\r",
+							"        response[i].category !== null ||\r",
+							"        response[i].city !== null ||\r",
+							"        response[i].ratings !==null)\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Not empty response\", function() {\r",
+							"    response = pm.response.json().length > 0\r",
+							"    pm.expect(response).to.be.true\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate ID is a number\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.id).to.be.a('number')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate name is a string\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.name).to.be.a('string')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate description is a string\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.description).to.be.a('string')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate features is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.features).to.be.an('array')\r",
+							"     })\r",
+							"});\r",
+							"pm.test(\"Validate images is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.images).to.be.an('array')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate category is an object\", () =>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.category).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate city is an object\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.city).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate ratings is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.ratings).to.be.an('array')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate response no to be undefined\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    pm.expect(response).not.to.be.undefined\r",
+							"});\r",
+							"pm.test(\"Validate elements´s response not to be undefined\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element).not.to.be.undefined\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate features´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let feature = element.features\r",
+							"         feature.forEach(e =>{\r",
+							"            pm.expect(e.id).to.be.a('number')\r",
+							"            pm.expect(e.name).to.be.a('string')\r",
+							"            pm.expect(e.icon).to.be.a('string')}\r",
+							"        )\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate images´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let image = element.images\r",
+							"         image.forEach(e =>{\r",
+							"            pm.expect(e.id).to.be.a('number')\r",
+							"            pm.expect(e.title).to.be.a('string')\r",
+							"            pm.expect(e.position).to.be.a('number')\r",
+							"            pm.expect(e.url).to.be.a('string')}\r",
+							"        )\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate city elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let cities = element.city\r",
+							"            pm.expect(cities.id).to.be.a('number')\r",
+							"            pm.expect(cities.name).to.be.a('string')\r",
+							"            pm.expect(cities.type).to.be.a('string')\r",
+							"            pm.expect(cities.country).to.be.a('string')\r",
+							"            pm.expect(cities.latitude).to.be.a('number')\r",
+							"            pm.expect(cities.longitude).to.be.a('number')\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate category´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let categories = element.category\r",
+							"            pm.expect(categories.id).to.be.a('number')\r",
+							"            pm.expect(categories.title).to.be.a('string')\r",
+							"            pm.expect(categories.description).to.be.a('string')\r",
+							"            pm.expect(categories.imgUrl).to.be.a('string')\r",
+							"})\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/cars",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cars - Get car by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.be.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Not null values\", function () {\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if (response[i].name!==null ||\r",
+							"        response[i].description !== null ||\r",
+							"        response[i].features !== null ||\r",
+							"        response[i].images !== null ||\r",
+							"        response[i].category !== null ||\r",
+							"        response[i].city !== null ||\r",
+							"        response[i].ratings !==null)\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Not empty response\", function() {\r",
+							"    response = pm.response.json().length > 0\r",
+							"    pm.expect(response).to.be.true\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate ID is a number\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.id).to.be.a('number')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate name is a string\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.name).to.be.a('string')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate description is a string\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.description).to.be.a('string')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate features is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.features).to.be.an('array')\r",
+							"     })\r",
+							"});\r",
+							"pm.test(\"Validate images is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.images).to.be.an('array')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate category is an object\", () =>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.category).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate city is an object\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.city).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate ratings is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.ratings).to.be.an('array')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate response no to be undefined\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    pm.expect(response).not.to.be.undefined\r",
+							"});\r",
+							"pm.test(\"Validate elements´s response not to be undefined\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element).not.to.be.undefined\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate features´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let feature = element.features\r",
+							"         feature.forEach(e =>{\r",
+							"            pm.expect(e.id).to.be.a('number')\r",
+							"            pm.expect(e.name).to.be.a('string')\r",
+							"            pm.expect(e.icon).to.be.a('string')}\r",
+							"        )\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate images´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let image = element.images\r",
+							"         image.forEach(e =>{\r",
+							"            pm.expect(e.id).to.be.a('number')\r",
+							"            pm.expect(e.title).to.be.a('string')\r",
+							"            pm.expect(e.position).to.be.a('number')\r",
+							"            pm.expect(e.url).to.be.a('string')}\r",
+							"        )\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate city elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let cities = element.city\r",
+							"            pm.expect(cities.id).to.be.a('number')\r",
+							"            pm.expect(cities.name).to.be.a('string')\r",
+							"            pm.expect(cities.type).to.be.a('string')\r",
+							"            pm.expect(cities.country).to.be.a('string')\r",
+							"            pm.expect(cities.latitude).to.be.a('number')\r",
+							"            pm.expect(cities.longitude).to.be.a('number')\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate category´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let categories = element.category\r",
+							"            pm.expect(categories.id).to.be.a('number')\r",
+							"            pm.expect(categories.title).to.be.a('string')\r",
+							"            pm.expect(categories.description).to.be.a('string')\r",
+							"            pm.expect(categories.imgUrl).to.be.a('string')\r",
+							"})\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/cars?id=1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cars"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cars - Filter car by city name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.be.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Not null values\", function () {\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if (response[i].name!==null ||\r",
+							"        response[i].description !== null ||\r",
+							"        response[i].features !== null ||\r",
+							"        response[i].images !== null ||\r",
+							"        response[i].category !== null ||\r",
+							"        response[i].city !== null ||\r",
+							"        response[i].ratings !==null)\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Not empty response\", function() {\r",
+							"    response = pm.response.json().length > 0\r",
+							"    pm.expect(response).to.be.true\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate ID is a number\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.id).to.be.a('number')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate name is a string\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.name).to.be.a('string')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate description is a string\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.description).to.be.a('string')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate features is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.features).to.be.an('array')\r",
+							"     })\r",
+							"});\r",
+							"pm.test(\"Validate images is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.images).to.be.an('array')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate category is an object\", () =>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.category).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate city is an object\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.city).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate ratings is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.ratings).to.be.an('array')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate response no to be undefined\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    pm.expect(response).not.to.be.undefined\r",
+							"});\r",
+							"pm.test(\"Validate elements´s response not to be undefined\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element).not.to.be.undefined\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate features´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let feature = element.features\r",
+							"         feature.forEach(e =>{\r",
+							"            pm.expect(e.id).to.be.a('number')\r",
+							"            pm.expect(e.name).to.be.a('string')\r",
+							"            pm.expect(e.icon).to.be.a('string')}\r",
+							"        )\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate images´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let image = element.images\r",
+							"         image.forEach(e =>{\r",
+							"            pm.expect(e.id).to.be.a('number')\r",
+							"            pm.expect(e.title).to.be.a('string')\r",
+							"            pm.expect(e.position).to.be.a('number')\r",
+							"            pm.expect(e.url).to.be.a('string')}\r",
+							"        )\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate city elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let cities = element.city\r",
+							"            pm.expect(cities.id).to.be.a('number')\r",
+							"            pm.expect(cities.name).to.be.a('string')\r",
+							"            pm.expect(cities.type).to.be.a('string')\r",
+							"            pm.expect(cities.country).to.be.a('string')\r",
+							"            pm.expect(cities.latitude).to.be.a('number')\r",
+							"            pm.expect(cities.longitude).to.be.a('number')\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate category´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let categories = element.category\r",
+							"            pm.expect(categories.id).to.be.a('number')\r",
+							"            pm.expect(categories.title).to.be.a('string')\r",
+							"            pm.expect(categories.description).to.be.a('string')\r",
+							"            pm.expect(categories.imgUrl).to.be.a('string')\r",
+							"})\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/cars/filter?city=Bariloche (BRC)",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cars",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Bariloche (BRC)"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cars - Filter car by category name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.be.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Not null values\", function () {\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if (response[i].name!==null ||\r",
+							"        response[i].description !== null ||\r",
+							"        response[i].features !== null ||\r",
+							"        response[i].images !== null ||\r",
+							"        response[i].category !== null ||\r",
+							"        response[i].city !== null ||\r",
+							"        response[i].ratings !==null)\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Not empty response\", function() {\r",
+							"    response = pm.response.json().length > 0\r",
+							"    pm.expect(response).to.be.true\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate ID is a number\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.id).to.be.a('number')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate name is a string\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.name).to.be.a('string')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate description is a string\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.description).to.be.a('string')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate features is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.features).to.be.an('array')\r",
+							"     })\r",
+							"});\r",
+							"pm.test(\"Validate images is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.images).to.be.an('array')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate category is an object\", () =>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.category).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate city is an object\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.city).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate ratings is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.ratings).to.be.an('array')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate response no to be undefined\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    pm.expect(response).not.to.be.undefined\r",
+							"});\r",
+							"pm.test(\"Validate elements´s response not to be undefined\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element).not.to.be.undefined\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate features´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let feature = element.features\r",
+							"         feature.forEach(e =>{\r",
+							"            pm.expect(e.id).to.be.a('number')\r",
+							"            pm.expect(e.name).to.be.a('string')\r",
+							"            pm.expect(e.icon).to.be.a('string')}\r",
+							"        )\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate images´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let image = element.images\r",
+							"         image.forEach(e =>{\r",
+							"            pm.expect(e.id).to.be.a('number')\r",
+							"            pm.expect(e.title).to.be.a('string')\r",
+							"            pm.expect(e.position).to.be.a('number')\r",
+							"            pm.expect(e.url).to.be.a('string')}\r",
+							"        )\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate city elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let cities = element.city\r",
+							"            pm.expect(cities.id).to.be.a('number')\r",
+							"            pm.expect(cities.name).to.be.a('string')\r",
+							"            pm.expect(cities.type).to.be.a('string')\r",
+							"            pm.expect(cities.country).to.be.a('string')\r",
+							"            pm.expect(cities.latitude).to.be.a('number')\r",
+							"            pm.expect(cities.longitude).to.be.a('number')\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate category´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let categories = element.category\r",
+							"            pm.expect(categories.id).to.be.a('number')\r",
+							"            pm.expect(categories.title).to.be.a('string')\r",
+							"            pm.expect(categories.description).to.be.a('string')\r",
+							"            pm.expect(categories.imgUrl).to.be.a('string')\r",
+							"})\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/cars/filter?category=SUV",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cars",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "SUV"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cars - Filter cars by start date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.be.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Not null values\", function () {\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if (response[i].name!==null ||\r",
+							"        response[i].description !== null ||\r",
+							"        response[i].features !== null ||\r",
+							"        response[i].images !== null ||\r",
+							"        response[i].category !== null ||\r",
+							"        response[i].city !== null ||\r",
+							"        response[i].ratings !==null)\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Not empty response\", function() {\r",
+							"    response = pm.response.json().length > 0\r",
+							"    pm.expect(response).to.be.true\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate ID is a number\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.id).to.be.a('number')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate name is a string\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.name).to.be.a('string')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate description is a string\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.description).to.be.a('string')\r",
+							"     })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate features is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"     response.forEach(element => {\r",
+							"         pm.expect(element.features).to.be.an('array')\r",
+							"     })\r",
+							"});\r",
+							"pm.test(\"Validate images is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.images).to.be.an('array')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate category is an object\", () =>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.category).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate city is an object\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.city).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate ratings is an array\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.ratings).to.be.an('array')\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate response no to be undefined\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    pm.expect(response).not.to.be.undefined\r",
+							"});\r",
+							"pm.test(\"Validate elements´s response not to be undefined\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element).not.to.be.undefined\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Validate features´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let feature = element.features\r",
+							"         feature.forEach(e =>{\r",
+							"            pm.expect(e.id).to.be.a('number')\r",
+							"            pm.expect(e.name).to.be.a('string')\r",
+							"            pm.expect(e.icon).to.be.a('string')}\r",
+							"        )\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate images´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let image = element.images\r",
+							"         image.forEach(e =>{\r",
+							"            pm.expect(e.id).to.be.a('number')\r",
+							"            pm.expect(e.title).to.be.a('string')\r",
+							"            pm.expect(e.position).to.be.a('number')\r",
+							"            pm.expect(e.url).to.be.a('string')}\r",
+							"        )\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate city elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let cities = element.city\r",
+							"            pm.expect(cities.id).to.be.a('number')\r",
+							"            pm.expect(cities.name).to.be.a('string')\r",
+							"            pm.expect(cities.type).to.be.a('string')\r",
+							"            pm.expect(cities.country).to.be.a('string')\r",
+							"            pm.expect(cities.latitude).to.be.a('number')\r",
+							"            pm.expect(cities.longitude).to.be.a('number')\r",
+							"})\r",
+							"});\r",
+							"pm.test(\"Validate category´s elements\", ()=>{\r",
+							"    response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        let categories = element.category\r",
+							"            pm.expect(categories.id).to.be.a('number')\r",
+							"            pm.expect(categories.title).to.be.a('string')\r",
+							"            pm.expect(categories.description).to.be.a('string')\r",
+							"            pm.expect(categories.imgUrl).to.be.a('string')\r",
+							"})\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{host}}/cars/filter?start=2021-12-26&end=2021-12-30",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"cars",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2021-12-26"
+						},
+						{
+							"key": "end",
+							"value": "2021-12-30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Images - Get all images",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Not null values\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        if (response[i].title!==null ||\r",
+							"        response[i].position !== null ||\r",
+							"        response[i].url !== null)\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"pm.test(\"Not empty response\", function() {\r",
+							"    response = pm.response.json().length > 0\r",
+							"    pm.expect(response).to.be.true\r",
+							"});\r",
+							"pm.test(\"Validate url\", function () {\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        pm.expect(response[i].url).contains(\"images-tpi.s3.sa-east-1.amazonaws.com\")\r",
+							"    }\r",
+							"});\r",
+							"pm.test(\"Validate car url\", function () {\r",
+							"    let exist = false\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        let car = (response[i].title).split(' ')\r",
+							"        if((response[i].url).match(car[0]) && (response[i].url).match(car[1])){\r",
+							"            exist = true\r",
+							"            break;\r",
+							"        }\r",
+							"    }pm.expect(exist).to.be.true\r",
+							"});\r",
+							"pm.test(\"Validate not to be undefined\", function () {\r",
+							"   \r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        pm.expect(response[i]).not.to.be.undefined\r",
+							"    \r",
+							"    }\r",
+							"   });\r",
+							"\r",
+							"pm.test(\"Not duplicated values\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    let exist = false;\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        for (let j=0; j<response.length;j++){\r",
+							"             if (response[i]===response[j] )\r",
+							"        exist = true;\r",
+							"        break;\r",
+							"        }\r",
+							"    }\r",
+							"    pm.expect(exist).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate url is a string\",function(){\r",
+							"    let response = pm.response.json();\r",
+							"   for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].url).to.be.a(\"string\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate ID is a number\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].id).to.be.a(\"number\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate position to be a number\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].position).to.be.a(\"number\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate title to be a string\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].title).to.be.a(\"string\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate response to be an object\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i]).to.be.an(\"object\")\r",
+							"   }\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/images",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"images"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Register new user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test (\"New User\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Not null values\", function () {\r",
+							"    let response = pm.response.json();\r",
+							"    pm.expect(response.name!==null ||\r",
+							"        response.lastName !== null ||\r",
+							"        response.email !== null ||\r",
+							"        response.token !== null).to.be.true\r",
+							"});\r",
+							"pm.test(\"Not empty response\", function() {\r",
+							"    response = pm.response.json()\r",
+							"    \r",
+							"    pm.expect(response.length)>0\r",
+							"});\r",
+							"pm.test(\"Validate url\", function () {\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        pm.expect(response[i].url).contains(\"images-tpi.s3.sa-east-1.amazonaws.com\")\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate not to be undefined\", function () {\r",
+							"   \r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        pm.expect(response[i]).not.to.be.undefined   \r",
+							"    }\r",
+							"   });\r",
+							"\r",
+							"pm.test(\"Validate ID is a number\",function(){\r",
+							"    let response = pm.response.json();\r",
+							"   for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].id).to.be.a(\"number\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate email to be string\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].email).to.be.a(\"string\")\r",
+							"    pm.expect(response[i].email).contains(\"@\")\r",
+							"    pm.expect(response[i].email).contains(\".com\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate lastName to be a String\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].lastName).to.be.a(\"String\")\r",
+							"    pm.expect(response[i].lastName).not.contains.a(\"number\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate name to be a string\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].name).to.be.a(\"string\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate response to be an object\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i]).to.be.an(\"object\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate role to be a string\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    pm.expect(response.role).to.be.a('string')\r",
+							"})\r",
+							"pm.test(\"Save user email and password\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"   postman.setEnvironmentVariable(\"email\", response.email)\r",
+							"   postman.setEnvironmentVariable(\"password\", response.password)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Martina\",\r\n    \"lastName\" : \"Gonzalez\",\r\n    \"email\" : \"martugon@gmail.com\",\r\n    \"password\" : \"martu1234\"\r\n    \r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Login registered user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test (\"Login user\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Not null values\", function () {\r",
+							"    let response = pm.response.json();\r",
+							"    pm.expect(response.name!==null ||\r",
+							"        response.lastName !== null ||\r",
+							"        response.email !== null ||\r",
+							"        response.token !== null).to.be.true\r",
+							"});\r",
+							"pm.test(\"Not empty response\", function() {\r",
+							"    response = pm.response.json()\r",
+							"    \r",
+							"    pm.expect(response.length)>0\r",
+							"});\r",
+							"pm.test(\"Validate url\", function () {\r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        pm.expect(response[i].url).contains(\"images-tpi.s3.sa-east-1.amazonaws.com\")\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate not to be undefined\", function () {\r",
+							"   \r",
+							"    let response = pm.response.json();\r",
+							"    for(let i=0; i < response.length; i++){\r",
+							"        pm.expect(response[i]).not.to.be.undefined   \r",
+							"    }\r",
+							"   });\r",
+							"\r",
+							"pm.test(\"Validate ID is a number\",function(){\r",
+							"    let response = pm.response.json();\r",
+							"   for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].id).to.be.a(\"number\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate email to be string\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].email).to.be.a(\"string\")\r",
+							"    pm.expect(response[i].email).contains(\"@\")\r",
+							"    pm.expect(response[i].email).contains(\".com\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate lastName to be a String\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].lastName).to.be.a(\"String\")\r",
+							"    pm.expect(response[i].lastName).not.contains.a(\"number\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate name to be a string\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i].name).to.be.a(\"string\")\r",
+							"   }\r",
+							"})\r",
+							"pm.test(\"Validate response to be an object\", function(){\r",
+							"    let response = pm.response.json();\r",
+							"    for (let i=0; i<response.length;i++){\r",
+							"    pm.expect(response[i]).to.be.an(\"object\")\r",
+							"   }\r",
+							"});\r",
+							"pm.test(\"Validate role to be a string\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    pm.expect(response.role).to.be.a('string')\r",
+							"})\r",
+							"pm.test(\"Save user token\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"   postman.setEnvironmentVariable(\"Token\", response.token)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"{{email}}\",\r\n    \"password\" : \"martu1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Booking - Add new booking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Length'))===0;\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test (\"New Booking status\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"car\" : {\r\n        \"id\" : 8\r\n    },\r\n    \"user\" :{\r\n       \"email\" : \"celesss@gmail.com\"\r\n          \r\n        \r\n    },\r\n    \"startDateTime\" : \"2021-12-05T10:00\",\r\n    \"endDate\" : \"2021-12-06\"    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/booking",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Booking  - Find by user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.be.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response is an object\",()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        pm.expect(element).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate id is a number\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.id).to.be.a('number')\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate car is an object\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.car).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate user is an object\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.user).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate StartDateTime format\", ()=>{\r",
+							"    let dateFormat = /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/;\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.startDateTime).to.match(dateFormat);\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate EndDate format\", ()=>{\r",
+							"    let dateFormat = /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]))/;\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.endDate).to.match(dateFormat);\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate car element\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"            pm.expect(element.car.id).to.be.a('number')\r",
+							"            pm.expect(element.car.name).to.be.a('string')\r",
+							"            pm.expect(element.car.description).to.be.a('string')\r",
+							"            pm.expect(element.car.features).to.be.an('array')\r",
+							"            pm.expect(element.car.images).to.be.an('array')\r",
+							"            pm.expect(element.car.category).to.be.an('object')\r",
+							"            pm.expect(element.car.city).to.be.an('object')\r",
+							"            pm.expect(element.car.ratings).to.be.an('array')\r",
+							"        })\r",
+							"})\r",
+							"pm.test(\"Validate user element\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.user.id).to.be.a('number')\r",
+							"        pm.expect(element.user.name).to.be.a('string')\r",
+							"        pm.expect(element.user.lastName).to.be.a('string')\r",
+							"        pm.expect(element.user.email).to.be.a('string')\r",
+							"        pm.expect(element.user.email).contains('.com')\r",
+							"        pm.expect(element.user.email).contains('@')\r",
+							"        pm.expect(element.user.password).to.be.a('string')\r",
+							"        pm.expect(element.user.role).to.be.an('object')\r",
+							"        pm.expect(element.user.role.id).to.be.a('number')\r",
+							"        pm.expect(element.user.role.name).to.be.a('string')\r",
+							"        pm.expect(element.user.enabled).to.be.true\r",
+							"        pm.expect(element.user.authorities).to.be.an('array')\r",
+							"        pm.expect(element.user.authorities[0].authority).contains('user')\r",
+							"    })\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{host}}/booking/find?userId=16",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"booking",
+						"find"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "16"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Booking - Find by car",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Content-type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.be.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response is an object\",()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element => {\r",
+							"        pm.expect(element).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate id is a number\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.id).to.be.a('number')\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate car is an object\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.car).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate user is an object\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.user).to.be.an('object')\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate StartDateTime format\", ()=>{\r",
+							"    let dateFormat = /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/;\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.startDateTime).to.match(dateFormat);\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate EndDate format\", ()=>{\r",
+							"    let dateFormat = /([12]\\d{3}-(0[1-9]|1[0-2]))/;\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.endDate).to.match(dateFormat);\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate car element\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"            pm.expect(element.car.id).to.be.a('number')\r",
+							"            pm.expect(element.car.name).to.be.a('string')\r",
+							"            pm.expect(element.car.description).to.be.a('string')\r",
+							"            pm.expect(element.car.features).to.be.an('array')\r",
+							"            pm.expect(element.car.images).to.be.an('array')\r",
+							"            pm.expect(element.car.category).to.be.an('object')\r",
+							"            pm.expect(element.car.city).to.be.an('object')\r",
+							"            pm.expect(element.car.ratings).to.be.an('array')\r",
+							"        })\r",
+							"})\r",
+							"pm.test(\"Validate user element\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    response.forEach(element =>{\r",
+							"        pm.expect(element.user.id).to.be.a('number')\r",
+							"        pm.expect(element.user.name).to.be.a('string')\r",
+							"        pm.expect(element.user.lastName).to.be.a('string')\r",
+							"        pm.expect(element.user.email).to.be.a('string')\r",
+							"        pm.expect(element.user.email).contains('.com')\r",
+							"        pm.expect(element.user.email).contains('@')\r",
+							"        pm.expect(element.user.password).to.be.a('string')\r",
+							"        pm.expect(element.user.role).to.be.an('object')\r",
+							"        pm.expect(element.user.role.id).to.be.a('number')\r",
+							"        pm.expect(element.user.role.name).to.be.a('string')\r",
+							"        pm.expect(element.user.enabled).to.be.true\r",
+							"        pm.expect(element.user.authorities).to.be.an('array')\r",
+							"        pm.expect(element.user.authorities[0].authority).contains('user')\r",
+							"    })\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/booking/find?car=1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"booking",
+						"find"
+					],
+					"query": [
+						{
+							"key": "car",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Politics - Update  Policy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							"pm.test(\"Content-Length header is 0\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Length'))===0;\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"delivery\" : \"Tiempo de espera: 120 minutos\",\r\n    \"healthAndSecurity\" : \"Presentar esquema de vacunación Covid-19 completo\",\r\n    \"cancellation\" : \"Se aplican cargos extra dentro de las 48 horas previas\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/politics",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"politics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Politics - Get Politics",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the active environment\", () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"Local\");\r",
+							"});\r",
+							"pm.test(\"Content-type header is present\", () => {\r",
+							"  pm.response.to.have.header(\"Content-type\");\r",
+							"});\r",
+							"pm.test(\"Content-type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.be.eql('application/json');\r",
+							"});\r",
+							"pm.test(\"Connection header is present\", ()=>{\r",
+							"   pm.response.to.have.header('Connection')\r",
+							"});\r",
+							"pm.test(\"Connection header is keep-alive\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Connection')).to.be.eql('keep-alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is present\", ()=>{\r",
+							"    pm.response.to.have.header('Keep-Alive')\r",
+							"});\r",
+							"pm.test(\"Keep-Alive header is timeout=60\", ()=>{\r",
+							"    pm.expect(pm.response.headers.get('Keep-Alive')).to.be.eql('timeout=60')\r",
+							"})\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response is an object\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    pm.expect(response).is.an('object')\r",
+							"});\r",
+							"pm.test(\"Validate id is a number\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    pm.expect(response.id).is.a('number')\r",
+							"});\r",
+							"pm.test(\"Validate delivery is a string\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    pm.expect(response.delivery).is.a('string')\r",
+							"});\r",
+							"pm.test(\"Validate healthAndSecurity is a string\", ()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    pm.expect(response.healthAndSecurity).is.a('string')\r",
+							"});\r",
+							"pm.test(\"Validate cancellation is a string\",()=>{\r",
+							"    let response = pm.response.json();\r",
+							"    pm.expect(response.cancellation).is.a('string')\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/politics",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"politics"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userID",
+			"value": ""
+		},
+		{
+			"key": "user",
+			"value": "user"
+		},
+		{
+			"key": "id",
+			"value": ""
+		}
+	]
+}
