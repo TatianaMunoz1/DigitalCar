@@ -1,0 +1,220 @@
+.container {
+  background: #ffffff;
+  border: 1px solid #dfe4ea;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 25px;
+  height: 100%;
+}
+.input_lastname_container {
+  position: relative;
+  width: auto;
+  height: 60px;
+}
+.icon_verification {
+  position: absolute;
+  bottom: 16px;
+  right: 8px;
+}
+
+.text_verification {
+  font-size: 14px;
+  color: #ff0000;
+  padding-top: 5px;
+}
+.form,
+.form_columns,
+.form_first_section,
+.form_second_section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.label {
+  display: block;
+  width: 100%;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+}
+.required {
+  font-size: 10.5px;
+  color: #929292;
+}
+.input_name,
+.input_lastname,
+.input_mail,
+.input_city {
+  height: 30px;
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: 5px;
+}
+.input_city_invalid {
+  height: 30px;
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: 5px;
+  border: 2px solid #ff0000;
+  background: #ffe1e1;
+}
+.input_name,
+.input_lastname,
+.input_mail {
+  background: #f1f1f1;
+}
+.form_third_section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
+.input_textarea {
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 5px;
+  border: none;
+  resize: none;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+}
+.container_checkbox {
+  display: block;
+  position: relative;
+  display: flex;
+  padding-left: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.container_checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px 0px;
+}
+.container_checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+.container_checkbox input:checked ~ .checkmark {
+  background-color: #ffa25a;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.container_checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+.container_checkbox .checkmark:after {
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/*-----TABLET-----*/
+@media (min-width: 760px) and (max-width: 1280px) {
+  .label {
+    font-size: 14px;
+  }
+  .input_name,
+  .input_lastname,
+  .input_mail,
+  .input_city {
+    height: 40px;
+    padding: 6px;
+    font-size: 16px;
+  }
+  .icon_verification {
+    bottom: 12px;
+    right: 10px;
+  }
+  .input_city_invalid {
+    height: 40px;
+    padding: 6px;
+    border: 2px solid #ff0000;
+    background: #ffe1e1;
+  }
+  .input_textarea,
+  .container_checkbox {
+    font-size: 16px;
+  }
+}
+
+/*-----DESKTOP-----*/
+@media (min-width: 1281px) {
+  .container {
+    /* max-height: 177px; */
+  }
+  .label {
+    font-size: 14px;
+  }
+  .form_columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .form,
+  .form_first_section,
+  .form_second_section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .input_name,
+  .input_lastname,
+  .input_mail,
+  .input_city {
+    height: 40px;
+    padding: 6px;
+    font-size: 16px;
+  }
+  .input_textarea,
+  .container_checkbox {
+    font-size: 16px;
+  }
+  .icon_verification {
+    bottom: 12px;
+    right: 10px;
+  }
+  .input_city_invalid {
+    height: 40px;
+    padding: 6px;
+    border: 2px solid #ff0000;
+    background: #ffe1e1;
+  }
+  .form_third_section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 20px;
+  }
+}

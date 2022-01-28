@@ -1,0 +1,56 @@
+.icon_share {
+  /* color: #fff; */
+  font-size: 20px;
+  cursor: pointer;
+}
+/* 
+.icon_share:hover,
+.icon_share:hover:active,
+.icon_share:hover:target {
+  color: #ff7e19;
+  transition: all 0.3s ease-out;
+} */
+
+.icons_share_content {
+  position: absolute;
+  left: -10px;
+  background: rgba(2, 2, 2, 0.7);
+  padding: 5px;
+  padding-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+  z-index: 5;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+/*-----TABLET-----*/
+@media (min-width: 760px) and (max-width: 1280px) {
+  .icons_share_content {
+    padding: 10px;
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+/*-----DESKTOP-----*/
+@media (min-width: 1281px) {
+  .icons_share_content {
+    padding: 10px;
+    flex-direction: row;
+    gap: 10px;
+  }
+}

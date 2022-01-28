@@ -1,0 +1,228 @@
+* {
+  box-sizing: border-box;
+  margin: 0%;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  min-width: 280px;
+  background: #f0f0f0;
+  border: 1px solid #dfe4ea;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+.image_container {
+  width: 100%;
+  object-fit: cover;
+}
+.icon_heart {
+  font-size: 28px;
+  color: #ffffff;
+}
+.icon_heart_clicked {
+  font-size: 28px;
+  color: red;
+}
+.body_information {
+  align-self: flex-start;
+}
+.header {
+  padding-bottom: 20px;
+}
+.details {
+  padding: 2px 0px;
+}
+.icon_details {
+  color: #000;
+  display: inline-block;
+  font-size: 14px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border: 0.5px solid #000;
+  border-radius: 3px;
+  line-height: 25px;
+}
+.container:hover {
+  transition: 0.3s;
+  box-shadow: 0 0 20px 0 rgba(61, 61, 61, 0.3);
+}
+.image_section {
+  position: relative;
+  color: white;
+}
+.image_container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  object-fit: cover;
+}
+.image {
+  height: 350px;
+  width: 100%;
+  object-fit: cover;
+  position: relative;
+  border-radius: 10px;
+}
+.icon_heart,
+.icon_heart_clicked {
+  font-size: 28px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  z-index: 15;
+  filter: drop-shadow(2px 2px 1.5px rgba(0, 0, 0, 0.2));
+}
+.body_information {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 28px;
+  color: #383b58;
+}
+.category {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.1rem;
+  line-height: 17px;
+  color: #75767a;
+  display: flex;
+  gap: 5px;
+}
+.body_information .details {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 20px;
+  color: #383b58;
+}
+.information {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.body_information .description {
+  margin-top: 20px;
+  color: rgb(0, 0, 0);
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 10;
+}
+.body_information .description.show_all {
+  margin-top: 20px;
+  height: 60px;
+  width: 100%;
+  white-space: normal;
+  overflow: auto;
+}
+.btn_show_all {
+  font-weight: 600;
+  color: rgb(90, 153, 224);
+  display: inline-block;
+  cursor: pointer;
+}
+.btn_show_all:hover,
+.btn_show_all:active {
+  color: rgb(28, 88, 156);
+  transition: all 0.3s ease-out;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(138, 138, 138);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #474747;
+}
+
+/*-----TABLET-----*/
+@media (min-width: 760px) and (max-width: 1280px) {
+  .container {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: flex-start;
+    grid-template-areas: "a b";
+  }
+  .image_container {
+    width: 100%;
+    object-fit: cover;
+    grid-area: a;
+    align-self: center;
+  }
+  .icon_heart {
+    font-size: 28px;
+  }
+  .body_information {
+    grid-area: b;
+    align-self: flex-start;
+  }
+  .title {
+    font-size: 1.6rem;
+    line-height: 45px;
+  }
+  .image {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/*-----DESKTOP-----*/
+@media (min-width: 1281px) {
+  .container {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    border-radius: 10px;
+    background: #f0f0f0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: flex-start;
+    grid-template-areas: "a b";
+  }
+  .icon_heart {
+    font-size: 28px;
+  }
+  .image_container {
+    width: 100%;
+    grid-area: a;
+  }
+  .image {
+    height: 100%;
+    object-fit: cover;
+  }
+  .body_information {
+    grid-area: b;
+    align-self: flex-start;
+  }
+  .title {
+    font-size: 1.7rem;
+    line-height: 35px;
+  }
+}

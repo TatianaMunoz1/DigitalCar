@@ -1,0 +1,200 @@
+[
+  {
+    "id": 1,
+    "type":"aeropuerto",
+    "city": "Bariloche Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 2,
+    "type":"ciudad",
+    "city": "Bariloche Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 3,
+    "type":"aeropuerto",
+    "city": "Buenos Aires Aeroparque",
+    "country": "Argentina"
+  },
+  {
+    "id": 4,
+    "type":"ciudad",
+    "city": "Buenos Aires Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 5,
+    "type":"aeropuerto",
+    "city": "Buenos Aires Ezeiza",
+    "country": "Argentina"
+  },
+  {
+    "id": 6,
+    "type":"ciudad",
+    "city": "Bahia Blanca Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 7,
+    "type":"aeropuerto",
+    "city": "Cordoba Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 8,
+    "type":"ciudad",
+    "city": "Cordoba Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 9,
+    "type":"aeropuerto",
+    "city": "El Calafate Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 10,
+    "type":"ciudad",
+    "city": "El Calafate Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 11,
+    "type":"aeropuerto",
+    "city": "El calafate Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 12,
+    "type":"aeropuerto",
+    "city": "Jujuy Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 13,
+    "type":"ciudad",
+    "city": "La Plata Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 14,
+    "type":"aeropuerto",
+    "city": "Mar del Plata Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 15,
+    "type":"ciudad",
+    "city": "Mar del Plata Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 16,
+    "type":"aeropuerto",
+    "city": "Mendoza Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 17,
+    "type":"ciudad",
+    "city": "Mendoza Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 18,
+    "type":"aeropuerto",
+    "city": "Neuquen Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 19,
+    "type":"aeropuerto",
+    "city": "Posadas Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 20,
+    "type":"aeropuerto",
+    "city": "Puerto Iguazu Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 21,
+    "type":"ciudad",
+    "city": "Puerto Madryn",
+    "country": "Argentina"
+  },
+  {
+    "id": 22,
+    "type":"ciudad",
+    "city": "Rosario Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 23,
+    "type":"ciudad",
+    "city": "Rio Cuarto Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 24,
+    "type":"aeropuerto",
+    "city": "San Luis Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 25,
+    "type":"aeropuerto",
+    "city": "Salta Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 26,
+    "type":"ciudad",
+    "city": "Salta Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 27,
+    "type":"aeropuerto",
+    "city": "San Martin de Los Andes Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 28,
+    "type":"ciudad",
+    "city": "San Martin de Los Andes Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 29,
+    "type":"aeropuerto",
+    "city": "Trelew Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 30,
+    "type":"aeropuerto",
+    "city": "Tucuman Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 31,
+    "type":"ciudad",
+    "city": "Tucuman Centro",
+    "country": "Argentina"
+  },
+  {
+    "id": 32,
+    "type":"aeropuerto",
+    "city": "Ushuaia Aeropuerto",
+    "country": "Argentina"
+  },
+  {
+    "id": 33,
+    "type":"ciudad",
+    "city": "Villa la Angostura Centro",
+    "country": "Argentina"
+  }
+]

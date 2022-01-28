@@ -1,0 +1,154 @@
+.input {
+  height: 30px;
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  background: #ffffff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: 5px;
+}
+.add_features_section,
+.new_feature_box {
+  background: #e9e9e9;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  padding: 20px 10px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+.new_features {
+  padding: 15px 0px;
+}
+.new_feature,
+.add_features {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+.new_feature_box:hover {
+  background: #e0e0e0;
+  transition: all 0.3s ease-out;
+}
+.btn_add_feature,
+.btn_delete_feature {
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  font-size: 15px;
+  line-height: 30px;
+  padding: 0px;
+  background: #ff7e19;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.btn_delete_feature {
+  background: #000000;
+}
+.btn_delete_feature:hover {
+  background: #7c7c7c;
+  transition: all 0.3s ease-out;
+}
+.btn_delete_feature:hover {
+  background: #7c7c7c;
+  transition: all 0.3s ease-out;
+}
+.btn_add_feature:hover {
+  background: #ffa25a;
+  transition: all 0.3s ease-out;
+}
+.btn_new_feature_container,
+.btn_container {
+  width: 65px;
+  display: flex;
+  justify-content: right;
+  align-self: center;
+}
+
+/*-----TABLET-----*/
+@media (min-width: 760px) and (max-width: 1280px) {
+  .input {
+    height: 40px;
+  }
+  .add_features,
+  .new_feature {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+  .add_features_section,
+  .new_feature_box {
+    background: #e9e9e9;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+    padding: 25px;
+    margin-bottom: 12px;
+    align-items: center;
+  }
+  .btn_add_feature,
+  .btn_delete_feature {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    font-size: 20px;
+    line-height: 40px;
+    padding: 0px;
+    border: none;
+    cursor: pointer;
+  }
+  .btn_new_feature_container,
+  .btn_container {
+    width: 85px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  }
+}
+
+/*-----DESKTOP-----*/
+@media (min-width: 1281px) {
+  .input {
+    height: 40px;
+  }
+  .add_features,
+  .new_feature {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 8fr 2fr;
+    gap: 20px;
+    width: 100%;
+  }
+  .new_feature_box,
+  .add_features_section {
+    padding: 30px;
+  }
+  .btn_add_feature,
+  .btn_delete_feature {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    font-size: 20px;
+    line-height: 40px;
+    align-self: flex-end;
+    cursor: pointer;
+  }
+  .btn_new_feature_container,
+  .btn_container {
+    width: 85px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  }
+  .btn_container {
+    align-self: flex-end;
+  }
+}

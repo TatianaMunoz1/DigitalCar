@@ -1,0 +1,191 @@
+* {
+  box-sizing: border-box;
+  margin: 0%;
+}
+.container {
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 25px;
+  text-align: center;
+  padding: 0px 20px;
+}
+
+.container_search {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.title {
+  font-size: 1.5rem;
+}
+.btn_container {
+  width: 100%;
+  max-width: 300px;
+}
+.city_picker,
+.day_picker {
+  color: white;
+  height: 40px;
+  max-width: 300px;
+  width: 100%;
+}
+.calendar_one_month {
+  display: contents;
+}
+.calendar_two_months {
+  display: none;
+}
+/*-----TABLET-----*/
+@media (min-width: 760px) and (max-width: 1280px) {
+  .container_search {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 0px;
+  }
+  .container {
+    width: 100%;
+    max-height: 750px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    display: grid;
+    padding-top: 80px;
+    grid-column: 6fr 6fr 1fr;
+    background: #000;
+    gap: 38px;
+  }
+  .title {
+    padding-top: 50px;
+    font-size: 2rem;
+  }
+  .btn_container {
+    max-width: 180px;
+    min-width: 110px;
+    width: 100%;
+  }
+  .city_picker,
+  .day_picker {
+    color: white;
+    height: 40px;
+    min-width: 250px;
+    max-width: 300px;
+  }
+  .image {
+    background: url("../../img/Mercedes-Benz_Maybach_Vision_6_Front_Wine_color.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -120px;
+    background-position-x: 50%;
+    width: 100%;
+    height: 500px;
+    margin-bottom: 100px;
+  }
+  .image_after_search {
+    background: none;
+    width: 100%;
+    height: 0px;
+    transition: 2s ease all;
+  }
+  .calendar_one_month {
+    display: none;
+  }
+  .calendar_two_months {
+    display: contents;
+  }
+  .city_picker,
+  .calendar_two_months {
+    width: 250px;
+  }
+}
+
+/*-----DESKTOP-----*/
+@media (min-width: 1281px) {
+  .container_search {
+    height: 40px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 60px;
+  }
+  .city_picker,
+  .day_picker {
+    height: 40px;
+    min-width: 450px;
+  }
+  .container {
+    background-color: black;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.05rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding: 0px 20px;
+  }
+  .title {
+    padding-top: 100px;
+    font-size: 2.5rem;
+  }
+  .btn_container {
+    min-width: 200px;
+    width: 250px;
+  }
+  .container_after_search {
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.05rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding-top: 100px;
+    padding-bottom: 0px;
+    transition: all 1s;
+  }
+  .image {
+    background: url("../../img/Mercedes-Benz_Maybach_Vision_6_Front_Wine_color.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -120px;
+    background-position-x: 50%;
+    width: 100%;
+    height: 500px;
+  }
+  .image_after_search {
+    background: url("../../img/Mercedes-Benz_Maybach_Vision_6_Front_Wine_color.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -120px;
+    background-position-x: 50%;
+    width: 100%;
+    height: 0px;
+    transition: all 1s;
+  }
+  .calendar_one_month {
+    display: none;
+  }
+  .calendar_two_months {
+    display: contents;
+  }
+}

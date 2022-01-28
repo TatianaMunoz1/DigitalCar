@@ -1,0 +1,194 @@
+.container {
+  color: black;
+  width: 448px;
+  height: 30px;
+}
+.seach {
+  height: 30px;
+  position: relative;
+  top: 0px;
+}
+.searchInputs {
+  height: 30px;
+  width: 100%;
+  position: relative;
+  top: 0px;
+}
+.input {
+  color: #000000;
+  height: 30px;
+  width: 100%;
+  font-size: 16px;
+  background: #ffffff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  border: 1px solid #000000;
+  padding-left: 28px;
+  cursor: pointer;
+}
+.input:focus {
+  outline: 1px solid #ff7e19;
+  border: 1px solid #ff7e19;
+}
+.input::placeholder {
+  color: rgba(0, 0, 0, 0.565);
+}
+.dataResult {
+  position: sticky;
+  z-index: 10;
+  height: 300px;
+  max-height: 100%;
+  overflow: auto;
+}
+.dataResult.hidden {
+  display: none;
+}
+
+.options {
+  height: 50px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 25px;
+  text-align: left;
+  border-bottom: 1px solid #ff7e19;
+}
+.options:hover,
+.options:active {
+  background-color: rgb(241, 236, 231);
+}
+.firstLine {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+}
+.secondLine {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  color: #545776;
+}
+.mapBtnOption {
+  color: rgba(0, 0, 0, 0.15);
+  position: absolute;
+  left: 7px;
+  font-size: 10px;
+}
+.mapBtn {
+  color: #5457768f;
+  font-size: 15px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+.iconChevron {
+  color: #5457768f;
+  font-size: 15px;
+  position: absolute;
+  top: 9px;
+  right: 8px;
+  cursor: pointer;
+}
+.iconChevron:active {
+  color: #ff7e19;
+}
+
+/*-----TABLET-----*/
+@media (min-width: 760px) and (max-width: 1280px) {
+  .container {
+    height: 40px;
+    width: 100%;
+  }
+  .seach {
+    height: 40px;
+    width: 100%;
+  }
+  .input {
+    height: 40px;
+    width: 100%;
+    min-width: 200px;
+  }
+  .searchInputs {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    top: 0px;
+  }
+  .mapBtn {
+    color: #5457768f;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    left: 8px;
+  }
+  .iconChevron {
+    color: #5457768f;
+    font-size: 15px;
+    position: absolute;
+    top: 13px;
+    right: 8px;
+    cursor: pointer;
+  }
+}
+
+/*-----DESKTOP-----*/
+@media (min-width: 1281px) {
+  .container {
+    height: 40px;
+    width: 100%;
+  }
+  .seach {
+    height: 40px;
+    width: 100%;
+  }
+  .input {
+    height: 40px;
+    width: 100%;
+    padding-left: 25px;
+  }
+  .searchInputs {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    top: 0px;
+  }
+  .firstLine {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px;
+    color: #000000;
+  }
+  .secondLine {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+    color: #545776;
+  }
+  .options {
+    height: 60px;
+    padding-left: 35px;
+  }
+  .mapBtnOption {
+    color: rgba(0, 0, 0, 0.15);
+    position: absolute;
+    left: 10px;
+    font-size: 14px;
+  }
+  .mapBtn {
+    color: #5457768f;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    left: 8px;
+  }
+  .iconChevron {
+    color: #5457768f;
+    font-size: 15px;
+    position: absolute;
+    top: 13px;
+    right: 8px;
+    cursor: pointer;
+  }
+}

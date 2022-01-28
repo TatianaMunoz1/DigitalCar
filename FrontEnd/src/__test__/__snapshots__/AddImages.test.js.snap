@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`add images render add images  1`] = `ShallowWrapper {}`;
+
+exports[`add images should call handleInputFeatureChange method 1`] = `ShallowWrapper {}`;

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`category picker render category picker  1`] = `ShallowWrapper {}`;

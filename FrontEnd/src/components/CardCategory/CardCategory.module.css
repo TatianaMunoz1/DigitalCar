@@ -1,0 +1,88 @@
+* {
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  margin: 0%;
+}
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.container p {
+  line-height: 22px;
+}
+.title {
+  font-size: 1.2rem;
+  line-height: 25px;
+}
+.description {
+  font-size: 0.9rem;
+}
+.container:active,
+.container:hover {
+  background: #ff7e19;
+  color: #fff;
+  cursor: pointer;
+  transform: scale(1.02, 1.02);
+  transition: 0.3s;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+}
+.image {
+  width: 100%;
+  height: 200px;
+  min-height: 200px;
+  object-fit: cover;
+  border-radius: 10px 10px 0px 0px;
+}
+.container_details {
+  position: relative;
+  margin-bottom: 5px;
+  padding: 15px;
+  height: auto;
+}
+
+/*-----TABLET-----*/
+@media (min-width: 760px) and (max-width: 1280px) {
+  .container {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .title {
+    font-size: 1.5rem;
+    line-height: 25px;
+  }
+  .description {
+    font-size: 1rem;
+  }
+  .container:hover {
+    background: #ff7e19;
+    color: #fff;
+    cursor: pointer;
+    transform: scale(1.05, 1.05);
+    transition: 0.3s;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  }
+}
+
+/*-----DESKTOP-----*/
+@media (min-width: 1281px) {
+  .container {
+    height: 100%;
+    width: 100%;
+  }
+  .image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+  .title {
+    font-size: 1.4rem;
+    line-height: 30px;
+  }
+  .description {
+    font-size: 1rem;
+  }
+}

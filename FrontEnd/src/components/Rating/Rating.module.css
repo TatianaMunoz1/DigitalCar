@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+  margin: 0%;
+}
+:root {
+  --rating: 0;
+}
+.puntuation_box {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+}
+.puntuation {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: space-between;
+  align-items: center;
+}
+.puntuation_stars {
+  display: flex;
+  gap: 2px;
+}
+.puntuation_number {
+  width: 35px;
+  height: 35px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 35px;
+  border-radius: 5px;
+  background-color: #000;
+  text-align: center;
+}
+.stars_rating {
+  --percent: calc(var(--rating) / 10 * 100%);
+  display: inline-block;
+}
+.stars_rating::before {
+  content: "★★★★★";
+  font-size: 20px;
+  background: linear-gradient(
+    90deg,
+    rgb(224, 164, 75) var(--percent),
+    rgb(172, 172, 172) var(--percent)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+/*-----TABLET-----*/
+@media (min-width: 760px) and (max-width: 1280px) {
+  .stars_rating::before {
+    font-size: 25px;
+  }
+  .puntuation {
+    gap: 3px;
+  }
+}
+
+/*-----DESKTOP-----*/
+@media (min-width: 1281px) {
+  .stars_rating::before {
+    font-size: 25px;
+  }
+  .puntuation {
+    gap: 3px;
+  }
+}

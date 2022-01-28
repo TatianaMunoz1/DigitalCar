@@ -1,0 +1,97 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background-color: black;
+  min-height: 100vh;
+  justify-content: center;
+  /* background: rgba(186, 205, 196, 0.1); */
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px 0px 30px;
+  gap: 18px;
+  width: 300px;
+  margin: 70px 0;
+}
+.title {
+  font-family: "Roboto";
+  font-size: 25px;
+  color: white;
+  padding-top: 0px;
+}
+.login_label {
+  color: rgb(41, 158, 255);
+  color: #ff7e19;
+  text-decoration-color: #ff7e19;
+  /* border-bottom: 1px solid #ff7e19; */
+  /* text-shadow: 1px 1px #ffa25a; */
+  font-weight: bold;
+}
+.error_message {
+  color: red;
+  margin: -10px 0px -20px 0px;
+  width: 300px;
+  text-align: center;
+}
+.error_message_password {
+  font-size: 12px;
+  top: -14px;
+  right: -18px;
+  position: relative;
+  text-align: right;
+  color: #ff0000;
+}
+.button_container {
+  padding: 10px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+.login_box {
+  padding-top: 10px;
+  font-size: 15px;
+  align-self: center;
+}
+
+/* -----TABLET----- */
+@media (min-width: 760px) and (max-width: 1280px) {
+  .form {
+    width: 350px;
+    gap: 30px;
+  }
+  .title {
+    padding-bottom: 20px;
+  }
+  .button_container {
+    width: 300px;
+    padding: 20px 0px 0px 0px;
+  }
+  .error_message_password {
+    right: -40px;
+  }
+}
+
+/* -----DESKTOPS----- */
+@media (min-width: 1281px) {
+  .form {
+    width: 450px;
+    gap: 20px;
+  }
+  .button_container {
+    width: 300px;
+  }
+  .error_message {
+    width: 450px;
+  }
+  .error_message_password {
+    right: -90px;
+  }
+  .button_container {
+    width: 400px;
+  }
+}

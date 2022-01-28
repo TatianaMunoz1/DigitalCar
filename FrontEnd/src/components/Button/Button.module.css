@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+:root {
+  font-family: "Roboto", sans-serif;
+  --primay: #fff;
+  --secondary: #ff7e19;
+  --tertiary: #ffa25a;
+}
+
+/*-----STYLES-----*/
+.btn {
+  border-radius: 2px;
+  text-decoration: none;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+.btn--full {
+  background-color: var(--secondary);
+  color: var(--primay);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--secondary);
+}
+.btn--void {
+  background-color: transparent;
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
+  padding: 8px 20px;
+  background: linear-gradient(rgb(54, 54, 54), rgb(33, 33, 33));
+}
+
+/*-----SIZES-----*/
+.btn--medium {
+  width: 200px;
+  height: 40px;
+  padding: 8px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.btn--large {
+  width: 250px;
+  height: 40px;
+  padding: 12px 26px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.btn--responsive {
+  width: 100%;
+  height: 40px;
+  padding: 12px 26px;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.btn--medium:hover,
+.btn--large:hover,
+.btn--responsive:hover,
+.btn--medium:active,
+.btn--large:active,
+.btn--responsive:active {
+  background-color: var(--tertiary);
+  color: var(--primay);
+  transition: all 0.3s ease-out;
+}
+
+/*-----MOBILE-----*/
+@media screen and (max-width: 760px) {
+  .btn--void {
+    background-color: transparent;
+    color: #000;
+    font-size: 16px;
+    border: none;
+    padding: 0px;
+  }
+  .btn--medium {
+    width: 100%;
+    height: 0%;
+    text-align: right;
+  }
+  .btn--responsive {
+    width: 100%;
+  }
+  .btn--medium:hover,
+  .btn--large:hover,
+  .btn--medium:active,
+  .btn--large:active,
+  .btn--responsive:hover,
+  .btn--responsive:active {
+    background-color: transparent;
+    color: var(--secondary);
+    transition: all 0.3s ease-out;
+  }
+  .btn--responsive:hover {
+    background-color: var(--secondary);
+    color: var(--primay);
+  }
+}

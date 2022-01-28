@@ -1,0 +1,350 @@
+* {
+  box-sizing: border-box;
+  margin: 0%;
+}
+.container {
+  position: absolute;
+  height: auto;
+  width: 100%;
+  background-color: #000;
+}
+.chevron_left {
+  font-size: 25px;
+  color: #fff;
+  cursor: pointer;
+}
+.chevron_left:hover,
+.chevron_left:active {
+  color: #ff7e19;
+  transition: all 0.3s ease-out;
+}
+.ubication_box {
+  height: 80px;
+  width: 100%;
+  color: #000;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 0px 15px;
+  background: #ececee;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.ubication {
+  display: flex;
+  gap: 10px;
+  color: #000;
+}
+.map_icon {
+  color: #545776;
+  font-size: 16px;
+}
+.puntuation_box {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+}
+.puntuation {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  justify-content: space-between;
+  align-items: center;
+}
+.puntuation_stars {
+  display: flex;
+  gap: 2px;
+}
+.star_icon {
+  font-size: 14px;
+}
+.puntuation_number {
+  width: 35px;
+  height: 35px;
+  color: #fff;
+  font-size: 24px;
+  line-height: 35px;
+  border-radius: 5px;
+  background-color: #545776;
+  text-align: center;
+}
+
+.image_container {
+  height: auto;
+  width: 100vw;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+.icons {
+  position: absolute;
+  color: #fff;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  z-index: 5;
+  cursor: pointer;
+  filter: drop-shadow(2.5px 2px 2px rgba(0, 0, 0, 0.2));
+}
+.image {
+  object-fit: cover;
+}
+.calendar_reservation {
+  width: 100%;
+}
+.description_box {
+  font-size: 15px;
+}
+.description_container {
+  padding: 30px 15px;
+}
+.description_container h3 {
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.details_box {
+  color: #fff;
+  width: 100%;
+  line-height: 1.8rem;
+  margin-top: 30px;
+}
+.subtitle {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 3rem;
+  border-bottom: 1px solid #fff;
+  margin: 20px 0px;
+}
+.icon_details {
+  color: #fff;
+  display: inline-block;
+  width: 25px;
+  height: 20px;
+  text-align: center;
+}
+.description {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.description h4 {
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: normal;
+}
+.calendar_reservation_container {
+  height: auto;
+  width: 100%;
+  padding: 15px;
+  background-color: #ebe9e7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.calendar_reservation {
+  height: auto;
+  margin-bottom: 30px;
+}
+.subtitle_second_type {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 3rem;
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+.calendar_reservation_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.datePicker_one_month_reservation {
+  display: contents;
+}
+.datePicker_two_months_reservation {
+  display: none;
+}
+.text_reservation {
+  color: #000;
+  font-size: 1rem;
+  align-self: flex-start;
+}
+.reservation_box {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.btn_reserva {
+  width: 100%;
+}
+.map_section {
+  background: #000;
+  width: 100%;
+  height: auto;
+  padding: 15px;
+}
+.map_container {
+  width: 100%;
+}
+.text_ubication {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
+@media (min-width: 450px) {
+  .map_section,
+  .calendar_reservation_container,
+  .description_container {
+    padding: 20px 5vw;
+  }
+  .calendar_reservation_box {
+    padding: 8vw;
+  }
+  .icons {
+    top: 15px;
+    left: 30px;
+    gap: 15px;
+  }
+  .datePicker_one_month_reservation {
+    display: contents;
+  }
+  .datePicker_two_months_reservation {
+    display: none;
+  }
+}
+
+/*-----TABLET-----*/
+@media (min-width: 760px) and (max-width: 1280px) {
+  .ubication_box,
+  .header_box {
+    padding: 0px 30px;
+  }
+  .details_box {
+    font-size: 1rem;
+    margin-top: 60px;
+  }
+  .details_items_box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    line-height: 50px;
+  }
+  .description {
+    margin-top: 0px;
+    width: auto;
+    color: #fff;
+  }
+  .reservation_box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .calendar_reservation {
+    width: 100%;
+  }
+  .calendar_reservation_box {
+    height: auto;
+    padding: 0px 4vw;
+  }
+  .datePicker_one_month_reservation {
+    display: none;
+  }
+  .datePicker_two_months_reservation {
+    display: contents;
+  }
+  .map_section,
+  .calendar_reservation_container,
+  .description_container {
+    padding: 30px 6vw;
+  }
+}
+
+/*-----DESKTOP-----*/
+@media (min-width: 1281px) {
+  .description_container {
+    padding: 30px;
+  }
+  .ubication_box,
+  .header_box {
+    padding: 0px 40px;
+  }
+  .image_container {
+    height: auto;
+    width: 100vw;
+    padding: 70px 40px 40px 40px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .details_box {
+    font-size: 1rem;
+    margin-top: 60px;
+  }
+  .details_items_box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    line-height: 50px;
+  }
+  .calendar_reservation {
+    width: 100%;
+    grid-area: calendar;
+  }
+  .datePicker_one_month_reservation {
+    display: none;
+  }
+  .datePicker_two_months_reservation {
+    display: contents;
+  }
+  .reservation_box {
+    height: auto;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    grid-area: text-box;
+  }
+  .calendar_reservation_box {
+    display: grid;
+    grid-auto-columns: calc(33.3% - 20px);
+    grid-template-areas: "calendar calendar text-box";
+    gap: 30px;
+    padding: 0px;
+  }
+  .map_section,
+  .calendar_reservation_container,
+  .description_container {
+    padding: 40px 6vw;
+  }
+  .subtitle_second_type {
+    margin-bottom: 20px;
+  }
+  .container .image_container .icons {
+    position: absolute;
+    top: 25px;
+    left: 40px;
+    color: #000;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    z-index: 5;
+    cursor: pointer;
+    filter: none;
+  }
+}
